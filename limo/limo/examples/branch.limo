@@ -1,0 +1,6 @@
+eketsaI r1, r0, 1
+eketsaI r2, r0, 2
+lekana  r1, r2, skip  # not taken (1 != 2)
+fapane  r1, r2, skip  # taken
+eketsaI r3, r0, 99    # flushed, never runs
+skip:   eketsaI r4, r0, 0x2A

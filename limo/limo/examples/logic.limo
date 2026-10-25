@@ -1,0 +1,7 @@
+# Program 2 — logic and shift
+eketsaI r1, r0, 10
+eketsaI r2, r0, 3
+kopanya r3, r1, r2   # AND = 2
+kapa    r4, r1, r2   # OR  = 11
+fapana  r5, r1, r2   # XOR = 9
+suthisa r6, r2, r2   # 3 << 3 = 24

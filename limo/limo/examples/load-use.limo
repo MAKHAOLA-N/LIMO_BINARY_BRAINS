@@ -1,0 +1,5 @@
+# A load followed straight away by a user of the loaded value
+eketsaI r1, r0, 0
+eketsaI r2, r0, 5
+jarisa  r3, 0(r1)
+eketsa  r4, r3, r2   # needs r3 -> one stall
