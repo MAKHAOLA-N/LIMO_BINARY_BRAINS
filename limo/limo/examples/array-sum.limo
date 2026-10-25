@@ -1,0 +1,12 @@
+# Program 3 — sum memory[0], memory[4], memory[8]
+        eketsaI r1, r0, 0    # base address
+        eketsaI r2, r0, 3    # item count
+        eketsaI r3, r0, 0    # index
+        eketsaI r4, r0, 0    # running sum
+loop:   lekana  r3, r2, done
+        jarisa  r5, 0(r1)
+        eketsa  r4, r4, r5
+        eketsaI r1, r1, 4
+        eketsaI r3, r3, 1
+        lekana  r0, r0, loop # always taken (r0 == r0)
+done:   ngola   r4, 12(r0)

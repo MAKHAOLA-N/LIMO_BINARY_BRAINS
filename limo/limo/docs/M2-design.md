@@ -2,8 +2,6 @@
 
 Team Binary Brains · CS3520 · AY 2026/2027
 
-> Items marked **TODO (team)** need the team's own input before submission.
-
 ## 1. ISA frozen
 
 The ISA is unchanged from M1: 16 registers, formats R/I/S/B, 15 instructions, 14-bit immediates,
@@ -262,11 +260,11 @@ Tests for the control decoder (M3) and hazard/forwarding unit (M4) are added whe
 
 | Requirement | Where | Status |
 | --- | --- | --- |
-| ISA frozen with D1 feedback applied | §1 | TODO (team): fill the D1 table |
+| ISA frozen with D1 feedback applied | §1 | TODO (team)-Havent gotten feedback: fill the D1 table |
 | Architecture and block diagram | §2, §3 | Done |
 | Pipeline-register data model | §4, `src/pipeline-model.js` | Done |
 | Interface wireframes | §7 | Done |
 | Working assembler with unit tests | `src/assembler.js`, `tests/run.js` | Done (37/37 pass) |
-| Site live on GitHub Pages | README link | TODO (team) |
-| Tag `m2` | GitHub release | TODO (team) |
-| Milestone PDF + one-page sprint note on Classroom | this file → PDF; `docs/M2-sprint-note.md` | TODO (team) |
+| Site live on GitHub Pages | README link | Done |
+| Tag `m2` | GitHub release | Done |
+| Milestone PDF + one-page sprint note on Classroom | this file → PDF; `docs/M2-sprint-note.md` |  |Done

@@ -1,0 +1,5 @@
+# Program 1 — arithmetic
+eketsaI r1, r0, 7
+eketsaI r2, r0, 5
+eketsa  r3, r1, r2   # r3 = 12
+fokotsa r4, r1, r2   # r4 = 2
