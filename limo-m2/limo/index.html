@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIMO Simulator</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header>
+    <small>CS3520 · Binary Brains</small>
+    <h1>LIMO Simulator</h1>
+  </header>
+
+  <main>
+    <!-- 1. Editor -->
+    <section class="panel">
+      <h2>1. Program editor</h2>
+      <div class="toolbar">
+        <select id="examples"></select>
+        <label class="file">Open .limo <input type="file" id="file" accept=".limo,.txt"></label>
+        <button id="assemble">Assemble</button>
+      </div>
+      <textarea id="source" spellcheck="false" wrap="off"></textarea>
+      <p id="message" class="message">Pick an example or type a program, then press Assemble.</p>
+    </section>
+
+    <!-- 2. Machine code -->
+    <section class="panel wide">
+      <h2>2. Machine code</h2>
+      <p class="legend">
+        <span class="f-opcode">opcode</span>
+        <span class="f-rd">rd</span>
+        <span class="f-rs1">rs1</span>
+        <span class="f-rs2">rs2</span>
+        <span class="f-funct">funct</span>
+        <span class="f-imm">imm / disp</span>
+        <span class="f-zero">unused (0)</span>
+      </p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>PC</th><th>Source</th><th>Fmt</th><th>Binary (fields split)</th><th>Hex</th></tr></thead>
+          <tbody id="machine"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3–5: wireframes for M3/M4 -->
+    <section class="panel">
+      <h2>3. Pipeline <em>(M3)</em></h2>
+      <div class="stages">
+        <div>IF</div><span>IF/ID</span><div>ID</div><span>ID/EX</span><div>EX</div><span>EX/MEM</span><div>MEM</div><span>MEM/WB</span><div>WB</div>
+      </div>
+      <div class="toolbar">
+        <button disabled>Step</button><button disabled>Run</button><button disabled>Pause</button>
+        <button disabled>Reset</button><label><input type="checkbox" disabled checked> Forwarding</label>
+      </div>
+      <p class="message">Cycle-by-cycle stepping, control signals and hazards arrive in M3 and M4.</p>
+    </section>
+
+    <section class="panel">
+      <h2>4. Registers</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Reg</th><th>Sesotho name</th><th>Value</th></tr></thead>
+          <tbody id="registers"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>Runs fully in the browser · no server, no login</footer>
+
+  <script src="src/assembler.js"></script>
+  <script src="src/examples.js"></script>
+  <script src="src/pipeline-model.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
