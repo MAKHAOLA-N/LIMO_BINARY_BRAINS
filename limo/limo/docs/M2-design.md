@@ -267,4 +267,4 @@ Tests for the control decoder (M3) and hazard/forwarding unit (M4) are added whe
 | Working assembler with unit tests | `src/assembler.js`, `tests/run.js` | Done (37/37 pass) |
 | Site live on GitHub Pages | README link | Done |
 | Tag `m2` | GitHub release | Done |
-| Milestone PDF + one-page sprint note on Classroom | this file → PDF; `docs/M2-sprint-note.md` |  |Done
+| Milestone PDF + one-page sprint note on Classroom | this file → PDF; `docs/M2-sprint-note.md` |Done|
