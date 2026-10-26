@@ -3,7 +3,7 @@
 A Sesotho-language processor derived from RISC-V, and a browser simulator for it.
 CS3520 Computer Organisation and Architecture, National University of Lesotho.
 
-**Live site:** _(GitHub Pages link)_
+**Live site:** https://github.com/MAKHAOLA-N/LIMO_BINARY_BRAINS
 
 ## Run it
 
