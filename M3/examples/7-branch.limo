@@ -1,0 +1,7 @@
+# 7. Branch not taken, then branch taken (control hazard)
+eketsaI r1, r0, 1
+eketsaI r2, r0, 2
+lekana  r1, r2, skip     # 1 == 2? no  -> not taken
+fapane  r1, r2, skip     # 1 != 2? yes -> taken, 2 instructions flushed
+eketsaI r3, r0, 99       # skipped: r3 stays 0
+skip:   eketsaI r4, r0, 0x2A   # r4 = 42
