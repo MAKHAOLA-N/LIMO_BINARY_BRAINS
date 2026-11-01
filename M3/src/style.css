@@ -1,0 +1,104 @@
+:root {
+  --bg: #f6f7f9; --panel: #fff; --text: #1d2330; --muted: #667085; --line: #dde1e7;
+  --accent: #1f3a8a; --ok: #157347; --err: #b42318; --hl: #fff4c2;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #11151c; --panel: #1a202a; --text: #e6e9ef; --muted: #98a2b3; --line: #2c3442;
+          --accent: #8fb0ff; --ok: #5fd08f; --err: #ff8a80; --hl: #4a3f12; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
+header { padding: 16px; border-bottom: 1px solid var(--line); }
+header small { color: var(--muted); }
+h1 { margin: 4px 0 0; font-size: 1.4rem; color: var(--accent); }
+h2 { margin: 0 0 10px; font-size: 1rem; }
+h2 em { color: var(--muted); font-weight: normal; font-size: .8rem; margin-left: 4px; }
+h3 { font-size: .9rem; margin: 14px 0 6px; }
+main { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; padding: 16px; }
+@media (min-width: 760px) { .wide { grid-column: span 2; } }
+.full { grid-column: 1 / -1; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; min-width: 0; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; align-items: center; }
+button, select, .file { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--text); cursor: pointer; }
+button:disabled { opacity: .45; cursor: default; }
+#assemble, #step { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.file input { display: none; }
+.status { margin-left: auto; font-weight: 600; }
+textarea { width: 100%; height: 260px; font: 14px/1.5 ui-monospace, monospace; padding: 10px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); }
+.message { margin: 8px 0 0; color: var(--muted); }
+.message.ok { color: var(--ok); }
+.message.error { color: var(--err); font-weight: 600; }
+.scroll { overflow-x: auto; }
+.tall { max-height: 420px; overflow-y: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: top; }
+th small { font-weight: normal; color: var(--muted); }
+.bits, code { font-family: ui-monospace, monospace; }
+tr.busy td { background: var(--hl); }
+tr.changed td { background: var(--hl); font-weight: 700; }
+td.one { font-weight: 700; color: var(--accent); }
+td.dim { color: var(--muted); }
+td.meaning { color: var(--muted); white-space: normal; min-width: 220px; }
+
+/* B1 field colours */
+.legend { font-size: 12px; color: var(--muted); }
+.legend span { display: inline-block; padding: 1px 6px; margin: 2px; border-radius: 4px; }
+.f-opcode { background: #fde2e1; color: #7a1d17; }
+.f-rd     { background: #dbeafe; color: #1e3a8a; }
+.f-rs1    { background: #dcfce7; color: #14532d; }
+.f-rs2    { background: #fef3c7; color: #78350f; }
+.f-funct  { background: #ede9fe; color: #4c1d95; }
+.f-imm    { background: #cffafe; color: #164e63; }
+.f-zero   { background: #eceff3; color: #667085; }
+.bits span { padding: 0 2px; border-radius: 3px; }
+
+/* B3 datapath (always on a white card so the drawing reads the same in dark mode) */
+.datapath-box { background: #fff; border: 1px solid var(--line); border-radius: 6px; }
+.dp { width: 100%; height: auto; display: block; }
+.dp .u { fill: #eef2ff; stroke: #1f3a8a; stroke-width: 1.6; }
+.dp .m { fill: #f1f5f9; stroke: #1f3a8a; stroke-width: 1.4; }
+.dp .p { fill: #fde68a; stroke: #92400e; stroke-width: 1.4; }
+.dp .w { fill: none; stroke: #334155; stroke-width: 1.4; marker-end: url(#arr); }
+.dp .t { fill: #0f172a; text-anchor: middle; font-weight: bold; }
+.dp .s { fill: #0f172a; text-anchor: middle; font-size: 9.5px; }
+.dp .l { fill: #475569; font-size: 9.5px; }
+.dp .v { fill: #b42318; font-size: 10px; font-weight: bold; text-anchor: middle; }
+.dp .g { fill: #92400e; text-anchor: middle; font-weight: bold; font-size: 10px; }
+.dp .st { fill: #1f3a8a; text-anchor: middle; font-weight: bold; font-size: 14px; }
+.dp .ins { fill: #0f172a; text-anchor: middle; font-size: 11px; font-family: ui-monospace, monospace; }
+.dp .stage { transition: opacity .2s; }
+.dp .stage.idle { opacity: .22; }
+.dp .stage.active .w { stroke: #1f3a8a; stroke-width: 2.4; }
+.dp .stage.active .u { fill: #c7d7fe; stroke-width: 2.4; }
+.dp .stage.active .m { fill: #c7d7fe; stroke-width: 2.2; }
+.dp #dp-branch { opacity: .25; }
+.dp #dp-branch.taken { opacity: 1; }
+.dp #dp-branch.taken .w { stroke: #b42318; stroke-width: 2.6; stroke-dasharray: 6 3; }
+.dp #dp-branch.taken .l { fill: #b42318; font-weight: bold; }
+.pregs td { white-space: normal; font-family: ui-monospace, monospace; font-size: 12px; min-width: 190px; line-height: 1.45; }
+
+/* B5 hazards */
+.hazards { margin: 0; padding-left: 18px; }
+.hazards li { margin: 6px 0; line-height: 1.4; }
+.hazards b { font-size: 11px; padding: 1px 5px; border-radius: 4px; background: var(--hl); }
+.fwd { font-family: ui-monospace, monospace; font-size: 13px; }
+
+/* B6 stats and chart */
+.tiles { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.tile { border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; min-width: 110px; }
+.tile small { display: block; color: var(--muted); }
+.tile b { font-size: 1.3rem; }
+.chart th, .chart td { padding: 3px 6px; font-size: 12px; text-align: center; border: 1px solid var(--line); }
+.chart tbody th { text-align: left; font-family: ui-monospace, monospace; font-weight: normal; }
+.chart td.stall { background: #fef3c7; color: #78350f; font-weight: 700; }
+.chart td.flush { background: #fde2e1; color: #7a1d17; text-decoration: line-through; }
+.chart td.c-IF  { background: #eef2ff; color: #1e3a8a; }
+.chart td.c-ID  { background: #dcfce7; color: #14532d; }
+.chart td.c-EX  { background: #cffafe; color: #164e63; }
+.chart td.c-MEM { background: #ede9fe; color: #4c1d95; }
+.chart td.c-WB  { background: #fde68a; color: #78350f; }
+
+#narration td { white-space: normal; min-width: 240px; }
+footer { text-align: center; color: var(--muted); padding: 16px; font-size: 13px; }

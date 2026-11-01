@@ -1,0 +1,7 @@
+# 4. Memory class: jarisa (load) and ngola (store)
+.data 0  11, 22          # memory[0] = 11, memory[4] = 22
+eketsaI r1, r0, 0        # r1 = base address 0
+jarisa  r2, 0(r1)        # r2 = memory[0] = 11
+jarisa  r3, 4(r1)        # r3 = memory[4] = 22
+ngola   r3, 8(r1)        # memory[8]  = 22  (needs r3 straight after the load)
+ngola   r2, 12(r1)       # memory[12] = 11

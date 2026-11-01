@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIMO Simulator</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header>
+    <small>CS3520 · Binary Brains</small>
+    <h1>LIMO Simulator</h1>
+  </header>
+
+  <main>
+    <!-- B1: editor -->
+    <section class="panel">
+      <h2>1. Program editor <em>B1</em></h2>
+      <div class="toolbar">
+        <select id="examples" title="Built-in example programs"></select>
+        <label class="file" title="Open a .limo file from your computer">Open .limo <input type="file" id="file" accept=".limo,.txt"></label>
+        <button id="assemble" title="Turn the program into machine code and load it">Assemble</button>
+      </div>
+      <textarea id="source" spellcheck="false" wrap="off" aria-label="LIMO program"></textarea>
+      <p id="message" class="message">Pick an example or type a program, then press Assemble.</p>
+    </section>
+
+    <!-- B1: machine code (+ B2 breakpoints) -->
+    <section class="panel wide">
+      <h2>2. Machine code <em>B1</em></h2>
+      <p class="legend">
+        <span class="f-opcode">opcode</span> <span class="f-rd">rd</span> <span class="f-rs1">rs1</span>
+        <span class="f-rs2">rs2</span> <span class="f-funct">funct</span> <span class="f-imm">imm / disp</span>
+        <span class="f-zero">unused (0)</span> · tick <b>Break</b> to pause Run when that line is fetched
+      </p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Break</th><th>PC</th><th>Source</th><th>Fmt</th><th>Binary (fields split)</th><th>Hex</th><th>Stage now</th></tr></thead>
+          <tbody id="machine"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- B2 + B3: controls and live datapath -->
+    <section class="panel full">
+      <h2>3. Pipeline and datapath <em>B2 · B3</em></h2>
+      <div class="toolbar">
+        <button id="step" title="Run one clock cycle">Step</button>
+        <button id="run" title="Keep stepping until the end or a breakpoint">Run</button>
+        <button id="pause" title="Stop Run">Pause</button>
+        <button id="back" title="Undo the last cycle">Step back</button>
+        <button id="reset" title="Start the program again from cycle 0">Reset</button>
+        <label title="Run speed">Speed
+          <select id="speed"><option value="900">slow</option><option value="400" selected>normal</option><option value="100">fast</option></select>
+        </label>
+        <label title="Turn the forwarding unit on or off (resets the run)"><input type="checkbox" id="forward" checked> Forwarding ON</label>
+        <span id="status" class="status">Assemble a program first.</span>
+      </div>
+      <div id="datapath" class="datapath-box"></div>
+      <h3>Contents of every pipeline register</h3>
+      <div class="scroll" id="pregs"></div>
+    </section>
+
+    <!-- B4 -->
+    <section class="panel wide">
+      <h2>4. Control signals <em>B4</em></h2>
+      <p class="message">Made in ID, then carried down the pipeline with their instruction (read the columns left to right).</p>
+      <div class="scroll" id="controls"></div>
+    </section>
+
+    <!-- B5 -->
+    <section class="panel">
+      <h2>5. Hazards and forwarding <em>B5</em></h2>
+      <div id="hazards"></div>
+    </section>
+
+    <!-- B7 -->
+    <section class="panel full">
+      <h2>6. What happened this cycle <em>B7</em></h2>
+      <div class="scroll" id="narration"></div>
+    </section>
+
+    <!-- B6 -->
+    <section class="panel full">
+      <h2>7. Statistics and pipeline chart <em>B6</em></h2>
+      <div id="stats" class="tiles"></div>
+      <p class="legend">* = stalled (waiting) · ✕ = flushed (thrown away) · each row is one fetched instruction, each column one clock cycle</p>
+      <div class="scroll" id="chart"></div>
+    </section>
+
+    <section class="panel">
+      <h2>8. Register file <em>B6</em></h2>
+      <p class="message">◀ = changed this cycle.</p>
+      <div class="scroll tall">
+        <table>
+          <thead><tr><th>Reg</th><th>Sesotho name</th><th>Decimal</th><th>Hex</th></tr></thead>
+          <tbody id="registers"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>9. Data memory <em>B6</em></h2>
+      <p class="message">256 bytes, little-endian, shown as 64 words. ◀ = changed this cycle.</p>
+      <div class="scroll tall">
+        <table>
+          <thead><tr><th>Address</th><th>Decimal</th><th>Hex</th></tr></thead>
+          <tbody id="memory"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>Runs fully in the browser · no server, no login</footer>
+
+  <script src="src/assembler.js"></script>
+  <script src="src/pipeline-model.js"></script>
+  <script src="src/pipeline.js"></script>
+  <script src="src/examples.js"></script>
+  <script src="src/datapath.js"></script>
+  <script src="src/views.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

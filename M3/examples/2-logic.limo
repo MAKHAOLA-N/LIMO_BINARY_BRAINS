@@ -1,0 +1,8 @@
+# 2. Logic class: AND, OR, XOR and both shifts
+eketsaI     r1, r0, 10
+eketsaI     r2, r0, 3
+kopanya     r3, r1, r2   # 10 AND 3 = 2
+kapa        r4, r1, r2   # 10 OR 3  = 11
+fapana      r5, r1, r2   # 10 XOR 3 = 9
+suthisa     r6, r2, r2   # 3 << 3   = 24
+khutlisetsa r7, r1, r2   # 10 >> 3  = 1
