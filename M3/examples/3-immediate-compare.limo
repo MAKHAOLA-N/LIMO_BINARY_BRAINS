@@ -1,0 +1,6 @@
+# 3. Immediate logic and compare class: kopanyaI, kapaI, nyane
+eketsaI  r1, r0, -6      # negative immediate
+kopanyaI r2, r1, 0xF     # -6 AND 15 = 10   (hex immediate)
+kapaI    r3, r0, 0x30    # 0 OR 48 = 48
+nyane    r4, r1, r2      # -6 < 10  -> 1
+nyane    r5, r2, r1      # 10 < -6  -> 0

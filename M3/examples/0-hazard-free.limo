@@ -1,0 +1,14 @@
+# 0. Hazard-free program (M3): every instruction class, no stalls, no flushes.
+# Each result is used at least 3 instructions later, so it is already
+# written back before anyone reads it. Same cycle count with forwarding ON or OFF.
+.data 0  9
+        eketsaI r1, r0, 7      # r1 = 7
+        eketsaI r2, r0, 5      # r2 = 5
+        jarisa  r6, 0(r0)      # r6 = memory[0] = 9
+        eketsaI r7, r0, 1      # r7 = 1   (independent filler)
+        eketsa  r3, r1, r2     # r3 = 12
+        fokotsa r4, r1, r2     # r4 = 2
+        kopanya r5, r6, r1     # r5 = 9 AND 7 = 1
+        ngola   r3, 8(r0)      # memory[8] = 12
+        lekana  r1, r2, end    # 7 == 5? no -> not taken, nothing flushed
+end:    eketsaI r8, r0, 3      # r8 = 3

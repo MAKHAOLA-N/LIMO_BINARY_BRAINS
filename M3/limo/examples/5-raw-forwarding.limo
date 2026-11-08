@@ -1,0 +1,5 @@
+# 5. RAW hazards solved by forwarding (no stalls when forwarding is ON)
+eketsaI r1, r0, 3
+eketsa  r2, r1, r1       # needs r1 from the line above  -> EX/MEM
+eketsa  r3, r2, r1       # r2 from EX/MEM, r1 from MEM/WB
+fokotsa r4, r3, r2       # r3 from EX/MEM, r2 from MEM/WB
